@@ -24,7 +24,7 @@ export default function RootLayout({
           {children}
         </main>
         <footer className="footer">
-          <p>© 2024 水泳部 AI コーチシステム</p>
+          <p>© 2025 水泳部 AI コーチシステム</p>
         </footer>
       </body>
     </html>
