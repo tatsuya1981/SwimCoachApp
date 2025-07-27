@@ -1,5 +1,6 @@
 import React, { useState, useRef, DragEvent, useEffect, useCallback } from 'react';
 import styles from './VideoUploader.module.css';
+import VideoFormatGuide from '../VideoFormatGuide/VideoFormatGuide';
 
 interface VideoUploaderProps {
   onVideoAnalyzed: (advice: string[]) => void;
@@ -743,6 +744,11 @@ export default function VideoUploader({ onVideoAnalyzed }: VideoUploaderProps) {
           )}
         </button>
       )}
+
+{showFormatGuide && (
+  <VideoFormatGuide onClose={() => setShowFormatGuide(false)} />
+)}
+
     </div>
   );
 }
