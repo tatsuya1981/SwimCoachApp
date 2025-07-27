@@ -1,4 +1,4 @@
-import React, { useState, useRef, DragEvent, useEffect, useCallback } from 'react';
+import React, { useState, useRef, DragEvent, useEffect } from 'react';
 import styles from './VideoUploader.module.css';
 import VideoFormatGuide from '../VideoFormatGuide/VideoFormatGuide';
 
@@ -392,7 +392,7 @@ export default function VideoUploader({ onVideoAnalyzed }: VideoUploaderProps) {
           }
         };
 
-        video.onerror = (event) => {
+        video.onerror = () => {
           console.warn('動画読み込みエラー:', {
             error: video.error,
             errorCode: video.error?.code,
@@ -486,10 +486,7 @@ export default function VideoUploader({ onVideoAnalyzed }: VideoUploaderProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...analysisData,
-          filename: videoFile.name,
-        }),
+        body: JSON.stringify(analysisData),
       });
 
       if (!response.ok) {
@@ -620,11 +617,12 @@ export default function VideoUploader({ onVideoAnalyzed }: VideoUploaderProps) {
               {previewImage && !isGeneratingPreview && (
                 <div className={styles.previewContainer}>
                   <p className={styles.previewLabel}>選択した瞬間のプレビュー:</p>
-                  <img 
-                    src={previewImage} 
-                    alt="選択したフレーム" 
-                    className={styles.previewImage}
-                  />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src={previewImage} 
+                  alt="選択したフレーム" 
+                  className={styles.previewImage}
+                />
                   <p className={styles.previewHint}>
                     ※ 泳いでいる瞬間が写っていることを確認してください
                   </p>
@@ -687,11 +685,12 @@ export default function VideoUploader({ onVideoAnalyzed }: VideoUploaderProps) {
                           </div>
                         ) : (
                           <>
-                            <img 
-                              src={frame.image} 
-                              alt={`${frame.label}フレーム`} 
-                              className={styles.rangePreviewImage}
-                            />
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img 
+                                src={frame.image} 
+                                alt={`${frame.label}フレーム`} 
+                                className={styles.rangePreviewImage}
+                              />
                             <p className={styles.frameLabel}>
                               {frame.label} ({formatTime(frame.time)})
                             </p>

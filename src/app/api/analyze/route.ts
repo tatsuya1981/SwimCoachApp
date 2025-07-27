@@ -9,7 +9,7 @@ const openai = new OpenAI({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { images, image, filename, mode, timestamp, startTime, endTime } = body;
+    const { images, image, mode, timestamp, startTime, endTime } = body;
 
     // 画像データの取得（単一または複数）
     const imageArray = images || (image ? [image] : []);
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       });
       
       // 各画像を追加
-      imageArray.forEach((img, index) => {
+      imageArray.forEach((img: string) => {
         messageContent.push({
           type: "image_url" as const,
           image_url: {
